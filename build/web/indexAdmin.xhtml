@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>FST Libary|Login Admin </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" charset="UTF-8"/>
+        <link href="css/styleLogin.css" rel="stylesheet" />
+    </h:head>
+    <h:body>
+        <div class="login-page">
+            <div class="form">
+                <h3>Please login Admin</h3>
+                <h:form class="login-form">
+                    <h:panelGrid columns="2" cellpadding="10" >
+                        <br/>
+                        <p:inputText id="userName" value="#{admin.login}" required="true" placeholder="login"> </p:inputText>
+                        <br/>
+                        <p:password id="password" value="#{admin.pwd}" required="true" placeholder="password" ></p:password>
+                        <br/>
+                        <p:commandButton value="Log In" action="#{admin.connect()}" ></p:commandButton>
+                        <br/>
+                    </h:panelGrid>
+                    <p class="message">You're not an Admin? <a href="index.xhtml">Login as User</a></p>
+                </h:form>              
+            </div>
+        </div>
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+        <script src="js/indexLogin.js"></script>
+    </h:body>
+</html>

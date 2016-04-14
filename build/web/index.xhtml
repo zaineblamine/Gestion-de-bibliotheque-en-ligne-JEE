@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>FST Libary|Login </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" charset="UTF-8"/>
+        <link href="css/styleLogin.css" rel="stylesheet" />
+    </h:head>
+    <h:body>
+        <div class="login-page">
+            <div class="form">
+                <h3>Welcome to FST Libary Web Site</h3>
+
+                <h:form class="login-form">
+
+                    <h:panelGrid columns="2" cellpadding="10" >
+                        <br/>
+                        <p:inputText id="userName" value="#{user.login}" required="true" placeholder="login"> </p:inputText>
+                        <br/>
+                        <p:password id="password" value="#{user.pwd}" required="true" placeholder="password" ></p:password>
+                        <br/>
+                        <p:commandButton value="Log In" action="#{user.loginProject()}" ></p:commandButton>
+                        <br/>
+                    </h:panelGrid>
+                    <p class="message">Not registered? <a href="#">Create an account</a></p>
+                </h:form>
+                <h:form class="register-form">
+                    <h:panelGrid columns="2" cellpadding="10" >
+                        <br/>                        
+                        <p:inputText value="#{user.name}" required="true" placeholder="name"> </p:inputText>
+                        <br/>                        
+                        <p:inputText value="#{user.adress}" required="true" placeholder="adresse"> </p:inputText>
+                        <br/>                        
+                        <p:inputText value="#{user.tel}"  required="true" placeholder="telephone"></p:inputText>
+                        <br/>   
+                        <p:inputText value="#{user.email}"  required="true" placeholder="email"></p:inputText>
+                        <br/> 
+                        <p:inputText value="#{user.login}"  required="true" placeholder="login"></p:inputText>
+                        <br/>                        
+                        <p:password value="#{user.pwd}" required="true" placeholder="password"></p:password>
+                        <br/>                        
+                        <p:password  required="true" placeholder="password again"/>       
+                        <br/>
+                        <p:commandButton value="Create"  action="#{user.addUser}"/>
+                    </h:panelGrid>         
+                    <p class="message">Already registered? <a href="#">Sign In</a></p>
+                </h:form>                
+            </div>
+        </div>
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+        <script src="js/indexLogin.js"></script>
+    </h:body>
+</html>
