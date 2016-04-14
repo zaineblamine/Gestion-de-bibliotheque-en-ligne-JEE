@@ -154,34 +154,10 @@ public class User{
         }
     }
         //-------------------register-----------------------------------------------------
-
-               public String addUser() throws SQLException { // TESTED WITH SUCCESS
-        /*if (alreadyExist(getLogin())) {
-            return "home.xhtml?inscription=false";
-        }*/
-        String req = "INSERT INTO users VALUES (null, ? , ? , ? , ? , ? , ? );";
-                  PreparedStatement stat=getConnection().prepareStatement(req);
-        try {
-            stat.setString(1, getLogin());
-            stat.setString(2, getPwd());
-            stat.setString(3, getEmail());
-            stat.setString(4, getTel());
-            stat.setString(5, getName());
-            stat.setString(6, getAdress());
-
-            stat.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return "home";
-    }
      public String registerProject(){
         return "register";
     }
-     public String register() throws SQLException {
+     public String addUser() throws SQLException {
         boolean result =LoginAlreadyExist(getLogin());
         if (result) {
              String req = "INSERT INTO users VALUES (null, ? , ? , ? , ? , ? , ? );";
@@ -202,7 +178,6 @@ public class User{
         }            
             HttpSession session = Util.getSession();
             session.setAttribute("userName", getLogin());
- 
             return "home";
         } else {
  
@@ -252,12 +227,13 @@ public class User{
      public String logout() {
       HttpSession session = Util.getSession();
       session.invalidate();
-      return "login";
+      return "index";
    }
-
-    /**
-     * @return the id
-     */
+     public String goToBooks(){
+           HttpSession session = Util.getSession();
+            session.setAttribute("userName", getLogin());
+            return "books";
+     }   
     public Long getId() {
         return id;
     }

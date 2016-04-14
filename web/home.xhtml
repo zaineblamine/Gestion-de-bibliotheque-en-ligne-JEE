@@ -6,7 +6,9 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+            xmlns:p="http://primefaces.org/ui"
+>
     <h:head>
         <title>FST Libary| Home</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -30,6 +32,9 @@ and open the template in the editor.
                                 <div class="header">
                                     <div class="logo">
                                         <h1><a href="home.xhtml"><img src="images/logo.png" alt=""/></a></h1>
+                                        <h1>welcome #{user.login} </h1>
+                                        
+
                                     </div>
                                     <div class="social-icons">
                                         <ul>
@@ -46,11 +51,10 @@ and open the template in the editor.
                                 <div class='h_btm'>
                                     <div class='cssmenu'>
                                         <ul>
-                                            <li class='active'><a href='home.xhtml'><span>Home</span></a></li>
-                                            <li><a href='books.xhtml'><span>Books</span></a></li>
-                                            <li><a href='contact.xhtml'><span>Contact</span></a></li>
-                                            <li class='has-sub'><a href='#' action="#{user.logout()}"><span>Logout</span></a></li>
-                                            <div class="clear"></div>
+                                            <li class='active'><h:link value="Home" outcome="home"></h:link></li>
+                                            <li><h:link value="Books" outcome="books"></h:link></li>
+                                            <li><h:link value="Contact" outcome="contact"></h:link></li>
+                                            <li><p:commandLink value="Logout" action="#{user.logout()}"/></li>
                                         </ul>
                                     </div>
                                     <div class="search">
