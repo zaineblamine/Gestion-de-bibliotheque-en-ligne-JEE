@@ -86,11 +86,10 @@ public class User {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) // found
             {
-                int id=rs.getInt("id");
+                /*int id=rs.getInt("id");
                 String login=rs.getString("login");
                 System.out.println(rs.getString("login"));
-                HttpSession session= Util.getSession();
-                
+                HttpSession session= Util.getSession();*/                
                 return true;
             } else {
                 return false;

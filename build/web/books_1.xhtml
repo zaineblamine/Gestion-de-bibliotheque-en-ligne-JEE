@@ -88,18 +88,18 @@
                             <div class="specials-heading">
                                 <h3>Add Documents</h3>
                             </div>
-                          <h:form class="register-form">
+                            <h:form class="register-form">
                                 <h:panelGrid columns="1" cellpadding="10" >
                                     <br/>                        
-                                 
+
                                     <p:inputText value="#{customer.title}" required="true" placeholder="title"> </p:inputText>
-                                                           
+
                                     <p:inputText value="#{customer.description}"  required="true" placeholder="description"></p:inputText>
-                                       
+
                                     <p:inputText value="#{customer.language}"  required="true" placeholder="langage"></p:inputText> 
                                     <p:inputText value="#{customer.category}"  required="true" placeholder="category"></p:inputText>                                                 
                                     <p:inputText value="#{customer.nb}" required="true" placeholder="number"></p:inputText>                                                            
-                                    <p:commandButton value="Add"  action="#{customer.addBook()}" />
+                                    <p:commandButton value="Add Document"  action="#{customer.addBook()}" />
                                 </h:panelGrid>         
                             </h:form>  
                         </div>
