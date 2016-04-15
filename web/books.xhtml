@@ -17,7 +17,7 @@
                 <div class="wrap">
                     <div class="header">
                         <div class="logo">
-                            <h1><a href="home.xhtml"><img src="images/logo.png" alt=""/></a></h1>
+                            <h1><a href="#"><img src="images/logo.png" alt=""/></a></h1>
                                         <h1>welcome #{user.login} </h1>
                         </div>
                         <div class="social-icons">
@@ -70,9 +70,8 @@
                             
                             <div class="page-section" id="about">                       
                                 <div class="row">
-                                    <div class="col-md-12">
                                         
-                                        <h:form  class="contact-form">
+                                        <!--<h:form  class="contact-form">
                                             <fieldset class="col-md-4 col-sm-6">
                                                 <p:outputLabel for="Titre" value="Title:" />
 
@@ -99,11 +98,10 @@
                                                 
                                             </fieldset>
 
-                                        </h:form>
+                                        </h:form>-->
+                                        
 
-                                        <hr/>
-                                    </div>
-                                </div>
+                                        <hr/>                                </div>
                             </div>
 
 
@@ -113,9 +111,44 @@
 
 
 
-
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac sem. Duis ultricies pharetra magna. Donec accumsan malesuada orci. Donec sit amet eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Mauris dictum magna. Sed laoreet aliquam leo. Ut tellus dolor, dapibus eget, vel, cursus eleifend, elit. Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante eu lacus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac sem. Duis ultricies pharetra magna. Donec accumsan malesuada orci. Donec sit amet eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Mauris fermentum dictum magna. Sed laoreet aliquam leo. Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante eu lacus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac sem. Duis ultricies pharetra magna. Donec accumsan male</p>
-                            </div>
+                           
+                           
+                        </div>
+                         <div> 
+                                <h:form id="form1" > 
+            <p:dataTable value="#{customer.messages}" var="o" paginator="true" rows="3"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 100%;" >
+                <f:facet name="header">  
+                    Documents List  
+                </f:facet>
+                <p:column  filterBy="#{o.title}">
+                    <f:facet name="header">  
+                        <h:outputText value="Title" />  
+                    </f:facet>
+                    <h:outputText value="#{o.title}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">  
+                        <h:outputText value="Description" />  
+                    </f:facet>
+                    <h:outputText value="#{o.description}"/>
+                </p:column>
+                <p:column >
+                    <f:facet name="header">  
+                        <h:outputText value="Language" />  
+                    </f:facet>
+                    <h:outputText value="#{o.language}"/>
+                </p:column>
+                   <p:column >
+                    <f:facet name="header">  
+                        <h:outputText value="reserver" />  
+                    </f:facet>
+                       <h:commandButton value="reserver" action="#{customer.reserver(o)}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+                                </div>  
                             <div class="specials">
                                 <div class="specials-heading">
                                     <h3>Latest-News</h3>

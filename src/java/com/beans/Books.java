@@ -113,7 +113,7 @@ public Books(){}
         
     }*/
     public ArrayList<String> getListcategorie() {
-        String sql = "SELECT categorie FROM books";
+        String sql = "SELECT categorie FROM book";
         Statement stmt;
         try {
             stmt = getConnexion().createStatement();
@@ -134,7 +134,7 @@ public Books(){}
     }
 
     public boolean veriftitre(String Titre) {
-        String sql = "SELECT titre FROM books";
+        String sql = "SELECT titre FROM book";
         Statement stmt;
         try {
             stmt = getConnexion().createStatement();

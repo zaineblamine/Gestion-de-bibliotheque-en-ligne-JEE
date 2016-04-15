@@ -1,5 +1,6 @@
 package com.beans;
 
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,16 +8,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
- 
+
 @ManagedBean(name = "user")
 @SessionScoped
-public class User{
+public class User {
+
+    public static final String PROP_MESSAGEERR = "messageErr";
 
     private Long id;
     private String login;
@@ -25,70 +29,10 @@ public class User{
     private String tel;
     private String name;
     private String adress;
-        
-    private String uname;
-    private String password;
-    private String cpassword;
-    private String message;
-    //-- getters and setters
-    
-    /**
-     * @return the uname
-     */
-    public String getUname() {
-        return uname;
-    }
+    private String messageErr = "";
 
-    /**
-     * @param uname the uname to set
-     */
-    public void setUname(String uname) {
-        this.uname = uname;
-    }
-
-    /**
-     * @return the password
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * @param password the password to set
-     */
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    /**
-     * @return the cpassword
-     */
-    public String getCpassword() {
-        return cpassword;
-    }
-
-    /**
-     * @param cpassword the cpassword to set
-     */
-    public void setCpassword(String cpassword) {
-        this.cpassword = cpassword;
-    }
-
-    /**
-     * @return the message
-     */
-    public String getMessage() {
-        return message;
-    }
-
-    /**
-     * @param message the message to set
-     */
-    public void setMessage(String message) {
-        this.message = message;
-    }
- //--------------------database connection-------------------------------------------------
-      public static Connection getConnection() {
+    //--------------------database connection-------------------------------------------------
+    public static Connection getConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/bibliothèque",
@@ -99,49 +43,54 @@ public class User{
             return null;
         }
     }
- 
+
     public static void close(Connection con) {
         try {
             con.close();
         } catch (Exception ex) {
         }
     }
-    
+    private final transient PropertyChangeSupport propertyChangeSupport = new java.beans.PropertyChangeSupport(this);
+
     //-----------------login------------------------------------------------    
-    
-    public String loginProject() {
+    public String login() {
         boolean result = authentificationVerif(getLogin(), getPwd());
         if (result) {
             // get Http Session and store username
             HttpSession session = Util.getSession();
-            session.setAttribute("userName", getUname());
- 
+            session.setAttribute("userName", getLogin());
+
             return "home";
         } else {
- 
+
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
-                    "Invalid Login!",
-                    "Please Try Again!"));
+                            "Invalid Login!",
+                            "Please Try Again!"));
             return "index";
         }
     }
-    
-        public static boolean authentificationVerif(String user, String password){
+
+    public static boolean authentificationVerif(String user, String password) {
         Connection con = null;
         PreparedStatement ps = null;
         try {
             con = getConnection();
             ps = con.prepareStatement(
-                    "select login, pwd from users where login= ? and pwd= ? ");
+                    "select * from users where login= ? and pwd= ? ");
+            
             ps.setString(1, user);
             ps.setString(2, password);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) // found
             {
+                int id=rs.getInt("id");
+                String login=rs.getString("login");
                 System.out.println(rs.getString("login"));
+                HttpSession session= Util.getSession();
+                
                 return true;
             } else {
                 return false;
@@ -153,54 +102,55 @@ public class User{
             close(con);
         }
     }
-        //-------------------register-----------------------------------------------------
-     public String registerProject(){
+    //-------------------register-----------------------------------------------------
+
+    public String registerProject() {
         return "register";
     }
-     public String addUser() throws SQLException {
-        boolean result =LoginAlreadyExist(getLogin());
-        if (result) {
-             String req = "INSERT INTO users VALUES (null, ? , ? , ? , ? , ? , ? );";
-                  PreparedStatement stat=getConnection().prepareStatement(req);
-        try {
-            stat.setString(1, getLogin());
-            stat.setString(2, getPwd());
-            stat.setString(3, getEmail());
-            stat.setString(4, getTel());
-            stat.setString(5, getName());
-            stat.setString(6, getAdress());
 
-            stat.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }            
+    public String addUser() throws SQLException {
+        boolean result = LoginDontExist(getLogin());
+        if (result) {
+            String req = "INSERT INTO users VALUES (null, ? , ? , ? , ? , ? , ?,'disabled' );";
+            PreparedStatement stat = getConnection().prepareStatement(req);
+            try {
+                stat.setString(1, getLogin());
+                stat.setString(2, getPwd());
+                stat.setString(3, getEmail());
+                stat.setString(4, getTel());
+                stat.setString(5, getName());
+                stat.setString(6, getAdress());
+
+                stat.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             HttpSession session = Util.getSession();
             session.setAttribute("userName", getLogin());
-            return "home";
+            return "index";
         } else {
- 
+
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
-                    "Incorrect!",
-                    "Please Try Again!"));
- 
+                            "Login exist!!",
+                            "Please Try Again!"));
+
             // invalidate session, and redirect to other pages
- 
-            //message = "Invalid Login. Please Try Again!";
-            return "register";
+            setMessageErr("Invalid Login. Please Try Again!");
+            return "index";
         }
     }
-    
-     public static boolean LoginAlreadyExist(String login) {
+
+    public static boolean LoginDontExist(String login) {
         boolean b;
         Connection con = null;
         PreparedStatement ps1 = null;
 
         try {
-            con =getConnection();
+            con = getConnection();
             ps1 = con.prepareStatement(
                     "select login from users where login= ? ");
             ps1.setString(1, login);
@@ -213,31 +163,44 @@ public class User{
             } else {
                 b = true;
             }
-           return b;
-           
+            return b;
+
         } catch (Exception ex) {
             System.out.println("Error in register() -->" + ex.getMessage());
             return false;
         } finally {
             close(con);
         }
-        
+
     }
-     //-------------------logout----  
-     public String logout() {
-      HttpSession session = Util.getSession();
-      session.invalidate();
-      return "index";
-   }
-     public String goToBooks(){
-           HttpSession session = Util.getSession();
-            session.setAttribute("userName", getLogin());
-            return "books";
-     }   
-    public Long getId() {
-        return id;
+    //-------------------logout----  
+
+    public String logout() {
+        HttpSession session = Util.getSession();
+        session.invalidate();
+        return "index";
     }
 
+    public String goToBooks() {
+        HttpSession session = Util.getSession();
+        session.setAttribute("userName", getLogin());
+        return "books";
+    }
+
+    public Long getId() throws SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+    try {
+            con = getConnection();
+            ps = con.prepareStatement("select id from users where login='"+getLogin()+"'");
+            ps.setLong(1,id);
+                    }
+        catch (Exception ex) {
+            System.out.println("Database.getConnection() Error -->" + ex.getMessage());
+            return null;
+        }
+        return id;
+    }
     /**
      * @param id the id to set
      */
@@ -327,5 +290,61 @@ public class User{
      */
     public void setAdress(String adress) {
         this.adress = adress;
+    }
+
+    /**
+     * @return the messageErr
+     */
+    public String getMessageErr() {
+        return messageErr;
+    }
+
+    /**
+     * @param messageErr the messageErr to set
+     */
+    public void setMessageErr(String messageErr) {
+        java.lang.String oldMessageErr = this.messageErr;
+        this.messageErr = messageErr;
+        propertyChangeSupport.firePropertyChange(PROP_MESSAGEERR, oldMessageErr, messageErr);
+    }
+
+    public static ArrayList<CustomerBean> getCustomer() {
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("select * from book");
+            ArrayList<CustomerBean> al = new ArrayList<CustomerBean>();
+            ResultSet rs = ps.executeQuery();
+            boolean found = false;
+            while (rs.next()) {
+                CustomerBean e = new CustomerBean();
+                e.setId(rs.getInt("id"));
+                e.setTitle(rs.getString("title"));
+                e.setDescription(rs.getString("description"));
+                e.setLanguage(rs.getString("language"));
+                e.setNb(rs.getInt("numberDisp"));
+                al.add(e);
+                found = true;
+            }
+            rs.close();
+            if (found) {
+                return al;
+            } else {
+                return null; // no entires found
+            }
+        } catch (Exception e) {
+            System.out.println("Error In getCustomer() -->" + e.getMessage());
+            return (null);
+        }
+    }
+    public static void reserver(int id,int nb) throws SQLException{
+       try{
+        Connection con = getConnection();
+        PreparedStatement ps = con.prepareStatement("update book set numberDisp='"+(nb-1)+"' where id='"+id+"';");
+      // PrepareStatement ps=con.prepareStatement("insert into panier values")
+       int rs = ps.executeUpdate();
+         }
+         catch (Exception e) {
+            System.out.println("Error In getCustomer() -->" + e.getMessage());
+        }
     }
 }

@@ -23,10 +23,11 @@
                         <br/>
                         <p:password id="password" value="#{user.pwd}" required="true" placeholder="password" ></p:password>
                         <br/>
-                        <p:commandButton value="Log In" action="#{user.loginProject()}" ></p:commandButton>
+                        <p:commandButton value="Log In" action="#{user.login()}" ></p:commandButton>
                         <br/>
                     </h:panelGrid>
                     <p class="message">Not registered? <a href="#">Create an account</a></p>
+                    <p class="message">You're an Admin? <a href="indexAdmin.xhtml">Login as Admin</a></p>
                 </h:form>
                 <h:form class="register-form">
                     <h:panelGrid columns="2" cellpadding="10" >

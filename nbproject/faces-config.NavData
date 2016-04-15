@@ -2,11 +2,12 @@
 <Scene Scope="Project" version="2">
     <Scope Scope="Faces Configuration Only"/>
     <Scope Scope="Project">
-        <Node id="books.xhtml" x="900" y="150" zoom="true"/>
-        <Node id="indexAdmin.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="essai.xhtml" x="1150" y="150" zoom="true"/>
         <Node id="home_1.xhtml" x="650" y="300" zoom="true"/>
-        <Node id="index.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="indexAdmin.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="books.xhtml" x="900" y="150" zoom="true"/>
         <Node id="books_1.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="index.xhtml" x="150" y="150" zoom="true"/>
         <Node id="contact.xhtml" x="400" y="150" zoom="true"/>
         <Node id="logout.xhtml" x="150" y="450" zoom="true"/>
         <Node id="contact_1.xhtml" x="150" y="600" zoom="true"/>

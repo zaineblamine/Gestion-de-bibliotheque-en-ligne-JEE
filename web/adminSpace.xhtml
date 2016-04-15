@@ -17,7 +17,9 @@
                 <div class="wrap">
                     <div class="header">
                         <div class="logo">
-                            <h1><a href="home.xhtml"><img src="images/logo.png" alt=""/></a></h1>
+                            <h1><a href="#"><img src="images/logo.png" alt=""/></a></h1>
+                                                        <h1>hello Admin #{admin.login} </h1>
+
                         </div>
                         <div class="social-icons">
                             <ul>
@@ -34,12 +36,11 @@
                     <div class='h_btm'>
                         <div class='cssmenu'>
                             <ul>
-                                <li ><a href='home_1.xhtml'><span>Home</span></a></li>
-                                <li><a href='books_1.xhtml'><span>Books</span></a></li>
-                                <li><a href='contact_1.xhtml'><span>Contact</span></a></li>
-                                <li class='active'><a href='adminSpace.xhtml'><span>Admin Space</span></a></li>
-                                <li class='last'><a href='indexAdmin.xhtml'><span>Logout</span></a></li>
-                                <div class="clear"></div>
+                                <li><h:link value="Home" outcome="home_1"></h:link></li>
+                                <li><h:link value="Books" outcome="books_1"></h:link></li>
+                                <li ><h:link value="Contact" outcome="contact_1"></h:link></li>
+                                <li class='active'><h:link value="Add Admin" outcome="adminSpace"></h:link></li>
+                                <li><p:commandLink value="Logout" action="#{admin.logout()}"/></li>
                             </ul>
                         </div>                                                           
                         <div class="search">
@@ -60,153 +61,108 @@
                     <div class="about-us">
                         <div class="about-header">
                             <h3>Add An Admin</h3>
-                            
-                              <h:form class="register-form">
-                    <h:panelGrid columns="1" cellpadding="10" >
-                        <br/>                        
-                        <p:inputText value="#{admin.name}" required="true" placeholder="name"> </p:inputText>
-                        <br/>                        
-                        <p:inputText value="#{admin.adress}" required="true" placeholder="adresse"> </p:inputText>
-                        <br/>                        
-                        <p:inputText value="#{admin.tel}"  required="true" placeholder="telephone"></p:inputText>
-                        <br/>   
-                        <p:inputText value="#{admin.email}"  required="true" placeholder="email"></p:inputText>
-                        <br/> 
-                        <p:inputText value="#{admin.login}"  required="true" placeholder="login"></p:inputText>
-                        <br/>                        
-                        <p:password value="#{admin.pwd}" required="true" placeholder="password"></p:password>
-                        <br/>                        
-                        <p:password  required="true" placeholder="password again"/>       
-                        <br/>
-                        <p:commandButton value="Add Admin"  action="#{admin.addAdmin}" />
-                    </h:panelGrid>         
-                </h:form> 
-                            
+
+                            <h:form class="register-form">
+                                <h:panelGrid columns="1" cellpadding="10" >
+                                    <br/>                        
+                                    <p:inputText value="#{admin.name}" required="true" placeholder="name"> </p:inputText>
+                                    <br/>                        
+                                    <p:inputText value="#{admin.adress}" required="true" placeholder="adresse"> </p:inputText>
+                                    <br/>                        
+                                    <p:inputText value="#{admin.tel}"  required="true" placeholder="telephone"></p:inputText>
+                                    <br/>   
+                                    <p:inputText value="#{admin.email}"  required="true" placeholder="email"></p:inputText>
+                                    <br/> 
+                                    <p:inputText value="#{admin.login}"  required="true" placeholder="login"></p:inputText>
+                                    <br/>                        
+                                    <p:password value="#{admin.pwd}" required="true" placeholder="password"></p:password>
+                                    <br/>                        
+                                    <p:password  required="true" placeholder="password again"/>       
+                                    <br/>
+                                    <p:commandButton value="Add Admin"  action="#{admin.addAdmin}" />
+                                </h:panelGrid>         
+                            </h:form> 
+
                             <div class="clear"> </div>
                         </div>
                         <div class="about-info">
-                            
-                            
-                            
-                            
-                            
-                            
-                            <div class="page-section" id="about">                       
+         <div class="page-section" id="about">                       
                                 <div class="row">
                                     <div class="col-md-12">
-                                        
-                                        <h:form  class="contact-form">
-                                            <fieldset class="col-md-4 col-sm-6">
-                                                <p:outputLabel for="Titre" value="Title:" />
-
-                                                <p:inputText id="Titre" p:placeholder="Title" value="#{books.title}"></p:inputText>
-                                            </fieldset>
-                                            <fieldset class="col-md-4 col-sm-6">
-                                                <p:outputLabel  value="Writer" />
-                                              <p:inputText id="auteur" p:placeholder="Writer" value="#{books.writer}"></p:inputText>
-                                            </fieldset>
-                                            <fieldset class="col-md-4 col-sm-12">
-                                                <p:outputLabel value="Type" /><br/>
-                                                <p:selectOneMenu required="true" id="console" immediate="true" value="#{books.type}"  >
-
-                                                    <f:selectItem  id="txtCatImage"  itemValue="Java" itemLabel="Java"  />
-                                                    <f:selectItem  itemValue="c/c++" itemLabel="c/c++" />
-                                                    <f:selectItem itemValue="Android" itemLabel="Android" />
-                                                    <f:selectItem itemValue="JEE" itemLabel="JEE" />
-                                                    <f:selectItem  itemValue="Python" itemLabel="Python" ></f:selectItem>
-                                                    <f:selectItem   itemValue="WEB" itemLabel="WEB" ></f:selectItem>
-                                                    <f:selectItem   itemValue="Algorithme" itemLabel="Algorithme" ></f:selectItem>
-                                                </p:selectOneMenu>
-                                            </fieldset>
-                                          <fieldset class="col-md-12 col-sm-12">
-                                                
-                                            </fieldset>
-
-                                        </h:form>
-
-                                        <hr/>
+                                     <hr/>
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-
-
-
-
-
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac sem. Duis ultricies pharetra magna. Donec accumsan malesuada orci. Donec sit amet eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Mauris dictum magna. Sed laoreet aliquam leo. Ut tellus dolor, dapibus eget, vel, cursus eleifend, elit. Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante eu lacus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac sem. Duis ultricies pharetra magna. Donec accumsan malesuada orci. Donec sit amet eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Mauris fermentum dictum magna. Sed laoreet aliquam leo. Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante eu lacus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac sem. Duis ultricies pharetra magna. Donec accumsan male</p>
-                            </div>
-                            <div class="specials">
-                                <div class="specials-heading">
-                                    <h3>Latest-News</h3>
-                                    <div class="clear"> </div>
-                                </div>
+                           <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac sem. Duis ultricies pharetra magna. Donec accumsan malesuada orci. Donec sit amet eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Mauris dictum magna. Sed laoreet aliquam leo. Ut tellus dolor, dapibus eget, vel, cursus eleifend, elit. Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante eu lacus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac sem. Duis ultricies pharetra magna. Donec accumsan malesuada orci. Donec sit amet eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Mauris fermentum dictum magna. Sed laoreet aliquam leo. Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante eu lacus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac sem. Duis ultricies pharetra magna. Donec accumsan male</p>
+                        </div>
+                        <div class="specials">
+                            <div class="specials-heading">
+                                <h3>Latest-News</h3>
                                 <div class="clear"> </div>
-                                <div class="specials-grids">
-                                    <div class="special-grid">
-                                        <img src="images/pic2.jpg" title="image-name"/>
-                                        <a href="#">Latest Plans</a>
-                                        <p>Lorem ipsum dolor sit amet consectetur adiing elit. In volutpat luctus eros ac placerat. Quisque erat metus facilisis non feu,aliquam hendrerit quam. Donec ut lectus vel dolor adipiscing tincnt.</p>
-                                    </div>
-                                    <div class="special-grid">
-                                        <img src="images/pic3.jpg" title="image-name"/>
-                                        <a href="#">Pre Plans</a>
-                                        <p>Lorem ipsum dolor sit amet consectetur adiing elit. In volutpat luctus eros ac placerat. Quisque erat metus facilisis non feu,aliquam hendrerit quam. Donec ut lectus vel dolor adipiscing tincnt.</p>
-                                    </div>
-                                    <div class="special-grid spe-grid">
-                                        <img src="images/pic4.jpg" title="image-name"/>
-                                        <a href="#">Free Plans</a>
-                                        <p>Lorem ipsum dolor sit amet consectetur adiing elit. In volutpat luctus eros ac placerat. Quisque erat metus facilisis non feu,aliquam hendrerit quam. Donec ut lectus vel dolor adipiscing tincnt.</p>
-                                    </div>
-                                    <div class="clear"> </div>
+                            </div>
+                            <div class="clear"> </div>
+                            <div class="specials-grids">
+                                <div class="special-grid">
+                                    <img src="images/pic2.jpg" title="image-name"/>
+                                    <a href="#">Latest Plans</a>
+                                    <p>Lorem ipsum dolor sit amet consectetur adiing elit. In volutpat luctus eros ac placerat. Quisque erat metus facilisis non feu,aliquam hendrerit quam. Donec ut lectus vel dolor adipiscing tincnt.</p>
+                                </div>
+                                <div class="special-grid">
+                                    <img src="images/pic3.jpg" title="image-name"/>
+                                    <a href="#">Pre Plans</a>
+                                    <p>Lorem ipsum dolor sit amet consectetur adiing elit. In volutpat luctus eros ac placerat. Quisque erat metus facilisis non feu,aliquam hendrerit quam. Donec ut lectus vel dolor adipiscing tincnt.</p>
+                                </div>
+                                <div class="special-grid spe-grid">
+                                    <img src="images/pic4.jpg" title="image-name"/>
+                                    <a href="#">Free Plans</a>
+                                    <p>Lorem ipsum dolor sit amet consectetur adiing elit. In volutpat luctus eros ac placerat. Quisque erat metus facilisis non feu,aliquam hendrerit quam. Donec ut lectus vel dolor adipiscing tincnt.</p>
                                 </div>
                                 <div class="clear"> </div>
                             </div>
+                            <div class="clear"> </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--footer-->
-            <div class="footer-bg">	
-                <div class="wrap">
-                    <div class="footer">
-                        <div class="box1">
-                            <h4 class="btm">What We Do</h4>
-                            <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. ions from the 1914 below for those  by H. Rackham</p>
-                            <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those The standard chunk of Lorem Ipsum used since the 1500s is reproduced reproduced</p>
-                        </div>
-                        <div class="box1">
-                            <h4 class="btm">Categories</h4>
-                            <nav>
-                                <ul>
-                                    <li><a href="">The standard chunk of Lorem Ipsum used since </a></li>
-                                    <li><a href="">Duis a augue ac libero euismod viverra sitth</a></li>
-                                    <li><a href="">Duis a augue ac libero euismod viverra sit </a></li>
-                                    <li><a href="">The standard chunk of Lorem Ipsum used since </a></li>
-                                    <li><a href="">Duis a augue ac libero euismod viverra sit </a></li>
-                                    <li><a href="">The standard chunk of Lorem Ipsum used since </a></li>
-                                    <li><a href="">Duis a augue ac libero euismod viverra sit </a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                        <div class="box1">
-                            <h4 class="btm">Get in touch</h4>
-                            <div class="box1_address">
-                                <p>500 Lorem Ipsum Dolor Sit,</p>
-                                <p>22-56-2-9 Sit Amet, Lorem,</p>
-                                <p>USA</p>
-                                <p>Phone:(00) 222 666 444</p>
-                                <p>Fax: (000) 000 00 00 0</p>
-                                <p>Email: <span>info(at)mycompany.com</span></p>
-                                <p>Follow on: <span>Facebook</span>, <span>Twitter</span></p>
-                            </div>
-                        </div>
-                        <div class="clear"></div>			
+        </div>
+        <!--footer-->
+        <div class="footer-bg">	
+            <div class="wrap">
+                <div class="footer">
+                    <div class="box1">
+                        <h4 class="btm">What We Do</h4>
+                        <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. ions from the 1914 below for those  by H. Rackham</p>
+                        <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those The standard chunk of Lorem Ipsum used since the 1500s is reproduced reproduced</p>
                     </div>
+                    <div class="box1">
+                        <h4 class="btm">Categories</h4>
+                        <nav>
+                            <ul>
+                                <li><a href="">The standard chunk of Lorem Ipsum used since </a></li>
+                                <li><a href="">Duis a augue ac libero euismod viverra sitth</a></li>
+                                <li><a href="">Duis a augue ac libero euismod viverra sit </a></li>
+                                <li><a href="">The standard chunk of Lorem Ipsum used since </a></li>
+                                <li><a href="">Duis a augue ac libero euismod viverra sit </a></li>
+                                <li><a href="">The standard chunk of Lorem Ipsum used since </a></li>
+                                <li><a href="">Duis a augue ac libero euismod viverra sit </a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="box1">
+                        <h4 class="btm">Get in touch</h4>
+                        <div class="box1_address">
+                            <p>500 Lorem Ipsum Dolor Sit,</p>
+                            <p>22-56-2-9 Sit Amet, Lorem,</p>
+                            <p>USA</p>
+                            <p>Phone:(00) 222 666 444</p>
+                            <p>Fax: (000) 000 00 00 0</p>
+                            <p>Email: <span>info(at)mycompany.com</span></p>
+                            <p>Follow on: <span>Facebook</span>, <span>Twitter</span></p>
+                        </div>
+                    </div>
+                    <div class="clear"></div>			
                 </div>
             </div>
+        </div>
     </h:body>
 </html>
