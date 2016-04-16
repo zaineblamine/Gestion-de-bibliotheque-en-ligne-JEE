@@ -12,17 +12,7 @@
         <managed-bean-name>user</managed-bean-name>
         <managed-bean-class>com.beans.User</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
-    
-    <navigation-rule>
-        <from-view-id>/home.xhtml</from-view-id>
-        <navigation-case>
-            <from-action>#{User.goTobooks}</from-action>
-            <from-outcome>books</from-outcome>
-            <to-view-id>/books.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-    </navigation-rule>
+    </managed-bean>    
     <managed-bean>
         <managed-bean-name>admin</managed-bean-name>
         <managed-bean-class>com.beans.Admin</managed-bean-class>
@@ -38,4 +28,8 @@
         <managed-bean-class>com.beans.Cart</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+  <context-param>
+    <param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
+    <param-value>true</param-value>
+</context-param>
 </faces-config>

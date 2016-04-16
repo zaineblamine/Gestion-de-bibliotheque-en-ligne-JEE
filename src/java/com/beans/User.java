@@ -15,7 +15,9 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 @ManagedBean(name = "user")
 @SessionScoped
 public class User {
@@ -24,10 +26,13 @@ public class User {
 
     private Long id;
     private String login;
+    @NotNull(message="what is your login?")
     private String pwd;
+    @Size(min = 3, message="password too short! must have at least 3 caracters")
     private String email;
     private String tel;
     private String name;
+    @NotNull(message="what is your name?")
     private String adress;
     private String state;
     private String messageErr = "";
@@ -358,6 +363,15 @@ public String addUser() throws SQLException {
             System.out.println("Error In getCustomer() -->" + e.getMessage());
         }
     }
+    public void addToCart(int idBook,long idUser) throws SQLException{
+         try{
+        Connection con = getConnection();
+        PreparedStatement ps = con.prepareStatement("insert into panier values ('"+idBook+"','"+idUser+"');");
+       int rs = ps.executeUpdate();
+         }
+         catch (Exception e) {
+        }
+    }
     public static void enable(int id) throws SQLException{
        try{
         Connection con = getConnection();
@@ -407,6 +421,47 @@ public String addUser() throws SQLException {
             }
         } catch (Exception e) {
             System.out.println("Error In getRequest() -->" + e.getMessage());
+            return (null);
+        }
+    }
+        private static int sessionid;
+       public static int getSessionid() {
+        HttpSession session = Util.getSession();
+        
+        if (session != null) {
+            sessionid = (int) session.getAttribute("id");
+            if (sessionid!= 0)
+            {return  sessionid;}
+            else{ return 0;}
+        } else {
+            return 0;
+        }
+    }
+    public static ArrayList<Cart> getCart() {
+        try {
+            Connection con = getConnection();
+            int id=getSessionid();
+            
+            PreparedStatement ps = con.prepareStatement("select idBook from cart where userid=? ");
+            ps.setInt(1, id);
+            ArrayList<Cart> al = new ArrayList<Cart>();
+            ResultSet rs = ps.executeQuery();
+            boolean found = false;
+            while (rs.next()) {
+                Cart e = new Cart();
+                e.setIdBook(rs.getInt("idBook"));
+                
+                al.add(e);
+                found = true;
+            }
+            rs.close();
+            if (found) {
+                return al;
+            } else {
+                return null; // no entires found
+            }
+        } catch (Exception e) {
+            System.out.println("Error In getCart() -->" + e.getMessage());
             return (null);
         }
     }
