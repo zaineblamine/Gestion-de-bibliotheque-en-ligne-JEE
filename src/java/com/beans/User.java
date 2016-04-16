@@ -29,6 +29,7 @@ public class User {
     private String tel;
     private String name;
     private String adress;
+    private String state;
     private String messageErr = "";
 
     //--------------------database connection-------------------------------------------------
@@ -107,7 +108,7 @@ public class User {
         return "register";
     }
 
-    public String addUser() throws SQLException {
+public String addUser() throws SQLException {
         boolean result = LoginDontExist(getLogin());
         if (result) {
             String req = "INSERT INTO users VALUES (null, ? , ? , ? , ? , ? , ?,'disabled' );";
@@ -128,7 +129,7 @@ public class User {
             }
             HttpSession session = Util.getSession();
             session.setAttribute("userName", getLogin());
-            return "index";
+            return "adminApproval";
         } else {
 
             FacesContext.getCurrentInstance().addMessage(
@@ -186,7 +187,7 @@ public class User {
         return "books";
     }
 
-    public Long getId() throws SQLException {
+      public Long getId() throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
     try {
@@ -301,6 +302,17 @@ public class User {
     /**
      * @param messageErr the messageErr to set
      */
+      public String getState() {
+        return state;
+    }
+
+    /**
+     * @param state the state to set
+     */
+    public void setState(String state) {
+        this.state = state;
+    }
+    
     public void setMessageErr(String messageErr) {
         java.lang.String oldMessageErr = this.messageErr;
         this.messageErr = messageErr;
@@ -344,6 +356,58 @@ public class User {
          }
          catch (Exception e) {
             System.out.println("Error In getCustomer() -->" + e.getMessage());
+        }
+    }
+    public static void enable(int id) throws SQLException{
+       try{
+        Connection con = getConnection();
+        PreparedStatement ps = con.prepareStatement("update users set state='enabled' where id='"+id+"';");
+      //PreparedStatement ps=con.prepareStatement("insert into users values('5','mejdi','mejdi','mejdi@gmail.com','98564123','mejdi','chebbaa','disabled');");
+       int rs = ps.executeUpdate();
+         }
+         catch (Exception e) {
+            System.out.println("Error In getCustomer() -->" + e.getMessage());
+        }
+    }
+    
+      public static void disable(int id) throws SQLException{
+       try{
+        Connection con = getConnection();
+        PreparedStatement ps = con.prepareStatement("update users set state='disabled' where id='"+id+"';");
+       int rs = ps.executeUpdate();
+         }
+         catch (Exception e) {
+            System.out.println("Error In getCustomer() -->" + e.getMessage());
+        }
+    }
+     
+    public static ArrayList<WaitlistBean> getWaitlist() {
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("select * from users");
+            ArrayList<WaitlistBean> al = new ArrayList<WaitlistBean>();
+            ResultSet rs = ps.executeQuery();
+            boolean found = false;
+            while (rs.next()) {
+                WaitlistBean e = new WaitlistBean();
+                e.setId(rs.getInt("id"));
+                e.setLogin(rs.getString("login"));
+                e.setEmail(rs.getString("email"));
+                e.setName(rs.getString("name"));
+                e.setAdress(rs.getString("adress"));
+                e.setState(rs.getString("state"));
+                al.add(e);
+                found = true;
+            }
+            rs.close();
+            if (found) {
+                return al;
+            } else {
+                return null; // no entries found
+            }
+        } catch (Exception e) {
+            System.out.println("Error In getRequest() -->" + e.getMessage());
+            return (null);
         }
     }
 }

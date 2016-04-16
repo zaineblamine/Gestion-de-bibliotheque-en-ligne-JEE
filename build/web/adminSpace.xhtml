@@ -39,7 +39,7 @@
                                 <li><h:link value="Home" outcome="home_1"></h:link></li>
                                 <li><h:link value="Books" outcome="books_1"></h:link></li>
                                 <li ><h:link value="Contact" outcome="contact_1"></h:link></li>
-                                <li class='active'><h:link value="Add Admin" outcome="adminSpace"></h:link></li>
+                                <li class='active'><h:link value="Admin Space" outcome="adminSpace"></h:link></li>
                                 <li><p:commandLink value="Logout" action="#{admin.logout()}"/></li>
                             </ul>
                         </div>                                                           
@@ -58,68 +58,87 @@
         <div class="main_btm">
             <div class="wrap">
                 <div class="main">
+                    <div class="about-info">
+                            <h:form id="form1" > 
+            <p:dataTable value="#{waitlist.messages}" var="r" paginator="true" rows="3"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 100%;" >
+                <f:facet name="header">  
+                    User Requests List  
+                </f:facet>
+                <p:column  filterBy="#{r.login}">
+                    <f:facet name="header">  
+                        <h:outputText value="Login" />  
+                    </f:facet>
+                    <h:outputText value="#{r.login}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">  
+                        <h:outputText value="Email" />  
+                    </f:facet>
+                    <h:outputText value="#{r.email}"/>
+                </p:column>
+                <p:column >
+                    <f:facet name="header">  
+                        <h:outputText value="Name" />  
+                    </f:facet>
+                    <h:outputText value="#{r.name}"/>
+                </p:column>
+                <p:column >
+                    <f:facet name="header">  
+                        <h:outputText value="Adress" />  
+                    </f:facet>
+                    <h:outputText value="#{r.adress}"/>
+                </p:column>
+                <p:column >
+                    <f:facet name="header">  
+                        <h:outputText value="State" />  
+                    </f:facet>
+                    <h:outputText value="#{r.state}"/>
+                </p:column>
+                   <p:column >
+                    <f:facet name="header">  
+                        <h:outputText value="Enable User" />  
+                    </f:facet>
+                       <h:commandButton value="Enable" action="#{waitlist.enable(r)}"/>
+                </p:column>
+                <p:column >
+                    <f:facet name="header">  
+                        <h:outputText value="Disable User" />  
+                    </f:facet>
+                       <h:commandButton value="Disable" action="#{waitlist.disable(r)}"/>
+                </p:column>
+            </p:dataTable>
+                                
+                                
+        </h:form>
+                        </div>
                     <div class="about-us">
                         <div class="about-header">
                             <h3>Add An Admin</h3>
 
                             <h:form class="register-form">
                                 <h:panelGrid columns="1" cellpadding="10" >
-                                    <br/>                        
+                                                         
                                     <p:inputText value="#{admin.name}" required="true" placeholder="name"> </p:inputText>
-                                    <br/>                        
+                                                          
                                     <p:inputText value="#{admin.adress}" required="true" placeholder="adresse"> </p:inputText>
-                                    <br/>                        
+                                                         
                                     <p:inputText value="#{admin.tel}"  required="true" placeholder="telephone"></p:inputText>
-                                    <br/>   
+                                 
                                     <p:inputText value="#{admin.email}"  required="true" placeholder="email"></p:inputText>
-                                    <br/> 
+                                     
                                     <p:inputText value="#{admin.login}"  required="true" placeholder="login"></p:inputText>
-                                    <br/>                        
+                                                      
                                     <p:password value="#{admin.pwd}" required="true" placeholder="password"></p:password>
-                                    <br/>                        
+                                                          
                                     <p:password  required="true" placeholder="password again"/>       
-                                    <br/>
+                                    
                                     <p:commandButton value="Add Admin"  action="#{admin.addAdmin}" />
                                 </h:panelGrid>         
                             </h:form> 
-
-                            <div class="clear"> </div>
-                        </div>
-                        <div class="about-info">
-         <div class="page-section" id="about">                       
-                                <div class="row">
-                                    <div class="col-md-12">
-                                     <hr/>
-                                    </div>
-                                </div>
-                            </div>
-                           <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac sem. Duis ultricies pharetra magna. Donec accumsan malesuada orci. Donec sit amet eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Mauris dictum magna. Sed laoreet aliquam leo. Ut tellus dolor, dapibus eget, vel, cursus eleifend, elit. Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante eu lacus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac sem. Duis ultricies pharetra magna. Donec accumsan malesuada orci. Donec sit amet eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Mauris fermentum dictum magna. Sed laoreet aliquam leo. Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante eu lacus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac sem. Duis ultricies pharetra magna. Donec accumsan male</p>
-                        </div>
-                        <div class="specials">
-                            <div class="specials-heading">
-                                <h3>Latest-News</h3>
-                                <div class="clear"> </div>
-                            </div>
-                            <div class="clear"> </div>
-                            <div class="specials-grids">
-                                <div class="special-grid">
-                                    <img src="images/pic2.jpg" title="image-name"/>
-                                    <a href="#">Latest Plans</a>
-                                    <p>Lorem ipsum dolor sit amet consectetur adiing elit. In volutpat luctus eros ac placerat. Quisque erat metus facilisis non feu,aliquam hendrerit quam. Donec ut lectus vel dolor adipiscing tincnt.</p>
-                                </div>
-                                <div class="special-grid">
-                                    <img src="images/pic3.jpg" title="image-name"/>
-                                    <a href="#">Pre Plans</a>
-                                    <p>Lorem ipsum dolor sit amet consectetur adiing elit. In volutpat luctus eros ac placerat. Quisque erat metus facilisis non feu,aliquam hendrerit quam. Donec ut lectus vel dolor adipiscing tincnt.</p>
-                                </div>
-                                <div class="special-grid spe-grid">
-                                    <img src="images/pic4.jpg" title="image-name"/>
-                                    <a href="#">Free Plans</a>
-                                    <p>Lorem ipsum dolor sit amet consectetur adiing elit. In volutpat luctus eros ac placerat. Quisque erat metus facilisis non feu,aliquam hendrerit quam. Donec ut lectus vel dolor adipiscing tincnt.</p>
-                                </div>
-                                <div class="clear"> </div>
-                            </div>
-                            <div class="clear"> </div>
+                            <br/>
+                           
                         </div>
                     </div>
                 </div>
