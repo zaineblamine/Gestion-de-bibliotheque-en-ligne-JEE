@@ -34,21 +34,17 @@
                         <div class="clear"></div>
                     </div>
                     <div class='h_btm'>
-                        <div class='cssmenu'>
-                            <ul>
-                                <li><h:link value="Home" outcome="home_1"></h:link></li>
-                                <li><h:link value="Books" outcome="books_1"></h:link></li>
-                                <li ><h:link value="Contact" outcome="contact_1"></h:link></li>
-                                <li class='active'><h:link value="Admin Space" outcome="adminSpace"></h:link></li>
-                                <li><p:commandLink value="Logout" action="#{admin.logout()}"/></li>
-                            </ul>
-                        </div>                                                           
-                        <div class="search">
-                            <form>
-                                <input type="text" value=""/>
-                                <input type="submit" value=""/>
-                            </form>
-                        </div>
+                        <h:form>
+                            <div class='cssmenu'>
+                                <ul>
+                                    <li><h:link value="Home" outcome="home_1"></h:link></li>
+                                    <li><h:link value="Books" outcome="books_1"></h:link></li>
+                                    <li><h:link value="Contact" outcome="contact_1"></h:link></li>
+                                    <li class='active'><h:link value="Admin Space" outcome="adminSpace"></h:link></li>
+                                    <li><p:commandLink value="Logout" action="#{admin.logout()}"/></li>
+                                </ul>
+                            </div>
+                        </h:form>
                         <div class="clear"></div>
                     </div>
                 </div>

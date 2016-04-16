@@ -4,11 +4,6 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
     <managed-bean>
-        <managed-bean-name>books</managed-bean-name>
-        <managed-bean-class>com.beans.Books</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
-    <managed-bean>
         <managed-bean-name>util</managed-bean-name>
         <managed-bean-class>com.beans.Util</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
@@ -16,11 +11,6 @@
     <managed-bean>
         <managed-bean-name>user</managed-bean-name>
         <managed-bean-class>com.beans.User</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
-    <managed-bean>
-        <managed-bean-name>books1</managed-bean-name>
-        <managed-bean-class>com.beans.Books</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     
